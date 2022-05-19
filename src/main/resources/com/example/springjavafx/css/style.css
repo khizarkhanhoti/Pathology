@@ -1,0 +1,22 @@
+#pane_top{
+    -fx-background-color: #4d5463;
+}
+#label_title{
+    -fx-text-fill: white;
+}
+#anchor_paneCenter, #anchor_paneLeft, #anchor_paneRight{
+    -fx-border-style: dotted;
+}
+#btn_print_preview{
+    -fx-background-color: rgb(46,155,207);
+}
+#btn_save{
+    -fx-background-color:#0b824e ;
+}
+.jfx-button{
+    -fx-opacity: 0.9;
+    -fx-fill: white;
+}
+.jfx-button:hover{
+    -fx-opacity: 1;
+}
