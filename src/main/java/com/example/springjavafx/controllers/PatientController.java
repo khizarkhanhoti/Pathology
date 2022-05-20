@@ -6,27 +6,35 @@ import com.example.springjavafx.repositories.DoctorRepository;
 import com.example.springjavafx.repositories.HBRepository;
 import com.example.springjavafx.repositories.PatientRepository;
 import com.example.springjavafx.tests.byRange.HB;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static com.example.springjavafx.Helper.goBack;
 
-public class PatientController {
+@Slf4j
+public class PatientController implements Initializable {
 
     @FXML
-    public TextField specimenField;
-    public TextField nameField;
-    public TextField genderField;
-    public TextField cellField;
-    public TextField cnicField;
-    public TextField referredField;
+    public JFXTextField specimen;
+    public JFXTextField name;
+    public JFXComboBox<String> genderCombo;
+    public JFXTextField cellNo;
+    public JFXTextField cnic;
+    public JFXTextField referredBy;
 
     @Value("${sceneUrl}")
     public Resource resource;
@@ -39,15 +47,18 @@ public class PatientController {
     private DoctorRepository doctorRepository;
     @Autowired
     private HBRepository hbRepository;
+    
+    private ObservableList<String> genderItem;
+    
 
     @FXML
     public void onSubmit(ActionEvent actionEvent) throws IOException {
-        String specimen = specimenField.getText();
-        String name = nameField.getText();
-        String gender = genderField.getText();
-        String contact = cellField.getText();
-        String cnic = cnicField.getText();
-        String referredBy = referredField.getText();
+        String specimen = this.specimen.getText();
+        String name = this.name.getText();
+        String gender = this.genderCombo.getValue();
+        String contact = cellNo.getText();
+        String cnic = this.cnic.getText();
+        String referredBy = this.referredBy.getText();
     
         Doctor doctor = new Doctor();
         doctor.setName(referredBy);
@@ -57,11 +68,6 @@ public class PatientController {
         hb.setResult("34");
         hbRepository.save(hb);
         
-        System.out.println("Referred By : " + referredBy + " Specimen Category : " + specimen +
-                            "\nReg Code : " +  " Name : " + name +
-                            "\nGender : " + gender +
-                            "\nCell No. : " + contact + " CNIC : " + cnic);
-
         Patient patient = new Patient(name, gender, specimen, contact, cnic, doctor);
         patient.setHb(hb);
         System.out.println(patient);
@@ -73,5 +79,11 @@ public class PatientController {
     @FXML
     public void onCancel(ActionEvent actionEvent) throws IOException {
         goBack(actionEvent, loader, resource.getURL());
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        genderItem = FXCollections.observableArrayList("Male", "Female");
+        genderCombo.setItems(genderItem);
     }
 }

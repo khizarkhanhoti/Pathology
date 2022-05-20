@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +19,7 @@ import org.springframework.core.io.Resource;
 import javax.sql.DataSource;
 import java.net.URL;
 
+@Slf4j
 @SpringBootApplication
 @ComponentScan({
         "com.gluonhq.ignite.spring",

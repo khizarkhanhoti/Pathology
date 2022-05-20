@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class SceneController {
 	@FXML
 	private AnchorPane anchor_paneCenter;
