@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.springjavafx.controllers.LoginController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="341.0">
+         <children>
+            <ImageView fitHeight="400.0" fitWidth="341.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../AdobeStock_78106015_Preview.jpeg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ImageView fitHeight="157.0" fitWidth="259.0" layoutX="341.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXTextField fx:id="userField" labelFloat="true" layoutX="403.0" layoutY="200.0" onAction="#onKeyPressed" promptText="Username" />
+      <JFXPasswordField fx:id="passwordField" labelFloat="true" layoutX="403.0" layoutY="251.0" onAction="#onKeyPressed" promptText="Password" />
+      <JFXButton fx:id="login" buttonType="RAISED" layoutX="486.0" layoutY="316.0" onAction="#onLogin" text="Login" />
+      <JFXButton fx:id="register" buttonType="RAISED" layoutX="403.0" layoutY="316.0" onAction="#onRegister" text="Register" />
+      <Label fx:id="alertLabel" alignment="CENTER" layoutX="379.0" layoutY="173.0" prefHeight="17.0" prefWidth="175.0" textFill="RED" />
+   </children>
+</AnchorPane>

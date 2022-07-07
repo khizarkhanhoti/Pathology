@@ -1,5 +1,6 @@
 package com.example.springjavafx;
 
+import com.example.springjavafx.controllers.LoginController;
 import com.gluonhq.ignite.spring.SpringContext;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
 
-import javax.sql.DataSource;
 import java.net.URL;
 
 @Slf4j
@@ -33,7 +31,7 @@ public class SpringJavaFxApplication extends Application{
     private final SpringContext context = new SpringContext(this);
 
     @Value("${loginScene}")
-    public Resource resource;
+    public Resource loginScene;
 
     public static void main(String[] args) {
         Application.launch(SpringJavaFxApplication.class, args);
@@ -42,7 +40,7 @@ public class SpringJavaFxApplication extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         context.init(() -> SpringApplication.run(SpringJavaFxApplication.class));
-        URL url = resource.getURL();
+        URL url = loginScene.getURL();
         loader.setLocation(url);
         Parent primaryView = loader.load();
         Scene scene = new Scene(primaryView);

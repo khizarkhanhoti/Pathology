@@ -5,7 +5,8 @@ import com.example.springjavafx.entities.Patient;
 import com.example.springjavafx.repositories.DoctorRepository;
 import com.example.springjavafx.repositories.HBRepository;
 import com.example.springjavafx.repositories.PatientRepository;
-import com.example.springjavafx.tests.byRange.HB;
+import com.example.springjavafx.repositories.TestRepository;
+import com.example.springjavafx.tests.Test;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
@@ -14,6 +15,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,23 +27,32 @@ import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import static com.example.springjavafx.Helper.goBack;
+import static com.example.springjavafx.Helper.goTo;
 
 @Slf4j
 public class PatientController implements Initializable {
 
     @FXML
-    public JFXTextField specimen;
+    public JFXComboBox<String> specimenComboBox;
     public JFXTextField name;
-    public JFXComboBox<String> genderCombo;
+    public JFXComboBox<String> genderComboBox;
     public JFXTextField cellNo;
     public JFXTextField cnic;
-    public JFXTextField referredBy;
+    public JFXComboBox<String> referredByComboBox;
+    public DatePicker dobDatePicker;
+    public JFXComboBox testsComboBox;
 
-    @Value("${sceneUrl}")
-    public Resource resource;
+    @Value("${primaryScene}")
+    public Resource primaryScene;
+    @Value("${patientScene}")
+    public Resource patientScene;
+	@Value("${newDoctorScene}")
+    private Resource newDoctorScene;
 
     @Autowired
     private FXMLLoader loader;
@@ -47,43 +62,79 @@ public class PatientController implements Initializable {
     private DoctorRepository doctorRepository;
     @Autowired
     private HBRepository hbRepository;
+    @Autowired
+    private TestRepository testRepository;
     
-    private ObservableList<String> genderItem;
+    private ObservableList<Doctor> referredByList;
+    private ObservableList<Test> testsList;
     
-
+    
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
+        genderComboBox.setItems(genderList);
+    
+        ObservableList<String> specimenList = FXCollections.observableArrayList("Home", "Lab");
+        specimenComboBox.setItems(specimenList);
+        
+        referredByList = FXCollections.observableArrayList(doctorRepository.findAll());
+        referredByComboBox.setItems(getDoctorsName());
+        
+        testsList = FXCollections.observableArrayList(testRepository.findAll());
+        testsComboBox.setItems(getTestsName());
+    }
+    
+    //Provides names for Combo Box
+    public ObservableList<String> getDoctorsName(){
+        List<String> names = new ArrayList<>();
+        doctorRepository.findAll().stream().forEach(doctor -> names.add(doctor.getName()));
+        return FXCollections.observableArrayList(names);
+    }
+    
+    //Provides names for Combo Box
+    public ObservableList<String> getTestsName(){
+        List<String> names = new ArrayList<>();
+        testRepository.findAll().stream().forEach(test -> names.add(test.getName()));
+        return FXCollections.observableArrayList(names);
+    }
+    
     @FXML
     public void onSubmit(ActionEvent actionEvent) throws IOException {
-        String specimen = this.specimen.getText();
+        String specimen = this.specimenComboBox.getValue();
         String name = this.name.getText();
-        String gender = this.genderCombo.getValue();
+        String gender = this.genderComboBox.getValue();
         String contact = cellNo.getText();
         String cnic = this.cnic.getText();
-        String referredBy = this.referredBy.getText();
-    
-        Doctor doctor = new Doctor();
-        doctor.setName(referredBy);
-        doctorRepository.save(doctor);
+        Doctor referredBy = new Doctor();
+        referredBy.setName(this.referredByComboBox.getValue());
+        LocalDate dob = dobDatePicker.getValue();
         
-        HB hb = new HB();
-        hb.setResult("34");
-        hbRepository.save(hb);
+        if (doctorRepository.findAll().contains(referredBy)) {
+            doctorRepository.save(referredBy);
+        }
         
-        Patient patient = new Patient(name, gender, specimen, contact, cnic, doctor);
-        patient.setHb(hb);
+        Patient patient = new Patient(name, gender, specimen, contact, cnic, referredBy);
+        
         System.out.println(patient);
         patientRepository.save(patient);
 
-        goBack(actionEvent, loader, resource.getURL());
+        goTo(actionEvent, loader, primaryScene.getURL());
     }
 
     @FXML
     public void onCancel(ActionEvent actionEvent) throws IOException {
-        goBack(actionEvent, loader, resource.getURL());
+        goTo(actionEvent, loader, primaryScene.getURL());
     }
     
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        genderItem = FXCollections.observableArrayList("Male", "Female");
-        genderCombo.setItems(genderItem);
+    public void addDoctor(ActionEvent actionEvent) throws IOException {
+        loader.setLocation(newDoctorScene.getURL());
+//        FXMLLoader fxmlLoader = new FXMLLoader();
+//        fxmlLoader.setLocation(newDoctorScene.getURL());
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 }

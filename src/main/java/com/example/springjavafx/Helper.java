@@ -11,7 +11,8 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Helper {
-    public static void goBack(ActionEvent actionEvent, FXMLLoader loader, URL url) throws IOException {
+    public static void goTo(ActionEvent actionEvent, FXMLLoader loader, URL url) throws IOException {
+        
         loader.setLocation(url);
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

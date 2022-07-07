@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,18 +14,19 @@ import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 
-import static com.example.springjavafx.Helper.goBack;
+import static com.example.springjavafx.Helper.goTo;
 
 @Slf4j
 public class LoginController {
     @FXML
     public TextField userField;
     public TextField passwordField;
-    public Label usernameErrorLabel;
-    public Label passwordErrorLabel;
+    public Label  alertLabel;
 
     @Value("${primaryScene}")
-    public Resource resource;
+    public Resource primaryScene;
+    @Value("${registerScene}")
+    public Resource registerScene;
     @Autowired
     private FXMLLoader loader;
     
@@ -32,16 +35,25 @@ public class LoginController {
         String password = passwordField.getText();
         
         if (checkUserPassword(username, password)) {
-            goBack(event, loader, resource.getURL());
+            goTo(event, loader, primaryScene.getURL());
         } else {
             userField.setText("");
-            usernameErrorLabel.setText("Wrong Username!");
             passwordField.setText("");
-            passwordErrorLabel.setText("Wrong password!");
+            alertLabel.setText("Wrong Username or Password!");
         }
     }
 
     private boolean checkUserPassword(String username, String password) {
         return username.equals("khizar") && password.equals("khan");
+    }
+    
+    public void onKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER){
+        
+        }
+    }
+    
+    public void onRegister(ActionEvent event) throws IOException {
+        goTo(event, loader, registerScene.getURL());
     }
 }
