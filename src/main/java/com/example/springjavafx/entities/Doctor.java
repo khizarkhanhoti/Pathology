@@ -20,8 +20,10 @@ public class Doctor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
-	private String field;
-	private String designation;
+	
+	public Doctor(String name){
+		this.name = name;
+	}
 	
 	@Override
 	public boolean equals(Object o) {

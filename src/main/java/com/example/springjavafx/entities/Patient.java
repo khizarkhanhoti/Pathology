@@ -1,17 +1,18 @@
 package com.example.springjavafx.entities;
 
-import com.example.springjavafx.tests.byRange.HB;
+import com.example.springjavafx.tests.Test;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Patient{
@@ -35,9 +36,8 @@ public class Patient{
 	@NotNull
     private Doctor referred_by;
 	
-	@OneToOne
-	@JoinColumn(name = "hb_id")
-	private HB hb;
+	@ManyToMany
+	private List<Test> testList = new ArrayList<>();
 
     public Patient(String name, String gender, String specimen,
 				   String contact, String cnic, Doctor referred_by) {
@@ -60,5 +60,19 @@ public class Patient{
 	@Override
 	public int hashCode() {
 		return getClass().hashCode();
+	}
+	
+	@Override
+	public String toString() {
+		return "Patient{" +
+				"reg=" + reg +
+				", name='" + name + '\'' +
+				", gender='" + gender + '\'' +
+				", specimen='" + specimen + '\'' +
+				", contact='" + contact + '\'' +
+				", cnic='" + cnic + '\'' +
+				", referred_by=" + referred_by +
+				", testList=" + testList +
+				'}';
 	}
 }

@@ -1,8 +1,8 @@
 package com.example.springjavafx.tests;
 
-import com.example.springjavafx.entities.Test;
+import com.example.springjavafx.entities.RangeTest;
 
-public class OGTT extends Test {
+public class OGTT extends RangeTest {
 
 
 	private String type;
