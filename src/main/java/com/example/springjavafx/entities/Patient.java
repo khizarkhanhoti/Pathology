@@ -1,13 +1,10 @@
 package com.example.springjavafx.entities;
 
-import com.example.springjavafx.tests.Test;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -36,17 +33,20 @@ public class Patient{
 	@NotNull
     private Doctor referred_by;
 	
-	@ManyToMany
-	private List<Test> testList = new ArrayList<>();
+	//ToDo generating test results and database.
+	@OneToOne
+	@JoinColumn(name = "test_id")
+	private Tests tests;
 
     public Patient(String name, String gender, String specimen,
-				   String contact, String cnic, Doctor referred_by) {
+				   String contact, String cnic, Doctor referred_by, Tests tests) {
         this.name = name;
         this.gender = gender;
 		this.specimen = specimen;
         this.contact = contact;
         this.cnic = cnic;
         this.referred_by = referred_by;
+		this.tests = tests;
     }
 
 	@Override
@@ -72,7 +72,7 @@ public class Patient{
 				", contact='" + contact + '\'' +
 				", cnic='" + cnic + '\'' +
 				", referred_by=" + referred_by +
-				", testList=" + testList +
+				", testList=" + tests +
 				'}';
 	}
 }

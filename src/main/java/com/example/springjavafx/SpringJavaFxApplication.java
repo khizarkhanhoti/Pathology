@@ -1,6 +1,7 @@
 package com.example.springjavafx;
 
-import com.example.springjavafx.controllers.LoginController;
+import com.example.springjavafx.entities.User;
+import com.example.springjavafx.repositories.UserRepository;
 import com.gluonhq.ignite.spring.SpringContext;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
 
 import java.net.URL;
+import java.util.List;
 
 @Slf4j
 @SpringBootApplication
@@ -27,6 +29,8 @@ public class SpringJavaFxApplication extends Application{
 
     @Autowired
     private FXMLLoader loader;
+    @Autowired
+    private UserRepository userRepository;
 
     private final SpringContext context = new SpringContext(this);
 
@@ -46,9 +50,22 @@ public class SpringJavaFxApplication extends Application{
         Scene scene = new Scene(primaryView);
         stage.setTitle("JavaFXSpring");
         stage.setScene(scene);
+        stage.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            onClose(stage);
+        });
         stage.show();
     }
-
+    
+    public void onClose(Stage stage){
+        List<User> userList = userRepository.findAll();
+        for (User user : userList){
+            user.setActive(false);
+            userRepository.save(user);
+        }
+        stage.close();
+    }
+    
 //    @Bean
 //    public DataSource getDataSource() {
 //        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();

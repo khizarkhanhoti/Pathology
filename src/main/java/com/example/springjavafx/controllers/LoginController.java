@@ -1,5 +1,7 @@
 package com.example.springjavafx.controllers;
 
+import com.example.springjavafx.entities.User;
+import com.example.springjavafx.repositories.UserRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +31,8 @@ public class LoginController {
     public Resource registerScene;
     @Autowired
     private FXMLLoader loader;
+    @Autowired
+    private UserRepository userRepository;
     
     public void onLogin(ActionEvent event) throws IOException {
         String username = userField.getText();
@@ -44,7 +48,13 @@ public class LoginController {
     }
 
     private boolean checkUserPassword(String username, String password) {
-        return username.equals("khizar") && password.equals("khan");
+        User user = userRepository.findByNameAndPassword(username, password);
+        if (user != null && user.getName().equals(username)){
+            user.setActive(true);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
     
     public void onKeyPressed(KeyEvent keyEvent) {
