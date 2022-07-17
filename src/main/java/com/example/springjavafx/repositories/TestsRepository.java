@@ -1,13 +1,14 @@
 package com.example.springjavafx.repositories;
 
-import com.example.springjavafx.entities.Doctor;
+import com.example.springjavafx.entities.Tests;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DoctorRepository extends JpaRepository<Doctor, Long> {
+public interface TestsRepository extends JpaRepository<Tests, Long> {
 	
 	@Query
-	Doctor findByName(String name);
+	public Tests findByName(String name);
+	
 }

@@ -8,10 +8,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class PatientService {
 	
+	private final PatientRepository patientRepository;
+	
 	@Autowired
-	private PatientRepository patientRepository;
+	public PatientService(PatientRepository patientRepository) {
+		this.patientRepository = patientRepository;
+	}
 	
 	public void addPatient(Patient patient){
-	
+		patientRepository.save(patient);
 	}
+	
+	public Patient find(String name){
+		return patientRepository.findByName(name);
+	}
+	
+	
 }

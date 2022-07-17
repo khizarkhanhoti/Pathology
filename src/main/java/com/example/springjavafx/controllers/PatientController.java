@@ -2,10 +2,14 @@ package com.example.springjavafx.controllers;
 
 import com.example.springjavafx.entities.Doctor;
 import com.example.springjavafx.entities.Patient;
+import com.example.springjavafx.entities.Tests;
 import com.example.springjavafx.repositories.DoctorRepository;
 import com.example.springjavafx.repositories.HBRepository;
 import com.example.springjavafx.repositories.PatientRepository;
 import com.example.springjavafx.repositories.TestRepository;
+import com.example.springjavafx.services.DoctorService;
+import com.example.springjavafx.services.PatientService;
+import com.example.springjavafx.services.TestsService;
 import com.example.springjavafx.tests.Test;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -45,14 +49,23 @@ public class PatientController implements Initializable {
     public JFXTextField cnic;
     public JFXComboBox<String> referredByComboBox;
     public DatePicker dobDatePicker;
-    public JFXComboBox testsComboBox;
+    public JFXComboBox<String> testsComboBox;
 
+    //Resources
     @Value("${primaryScene}")
     public Resource primaryScene;
     @Value("${patientScene}")
     public Resource patientScene;
 	@Value("${newDoctorScene}")
     private Resource newDoctorScene;
+    
+    //Services
+    @Autowired
+    private PatientService patientService;
+    @Autowired
+    private DoctorService doctorService;
+    @Autowired
+    private TestsService testsService;
 
     @Autowired
     private FXMLLoader loader;
@@ -105,18 +118,13 @@ public class PatientController implements Initializable {
         String gender = this.genderComboBox.getValue();
         String contact = cellNo.getText();
         String cnic = this.cnic.getText();
-        Doctor referredBy = new Doctor();
-        referredBy.setName(this.referredByComboBox.getValue());
-        LocalDate dob = dobDatePicker.getValue();
-        
-        if (doctorRepository.findAll().contains(referredBy)) {
-            doctorRepository.save(referredBy);
-        }
-        
-        Patient patient = new Patient(name, gender, specimen, contact, cnic, referredBy);
-        
-        System.out.println(patient);
-        patientRepository.save(patient);
+        String referredBy = referredByComboBox.getValue();
+        String testRequired = testsComboBox.getValue();
+//        LocalDate dob = dobDatePicker.getValue();
+    
+        Doctor doctor = doctorService.add(referredBy);
+        Tests test = testsService.add(testRequired);
+        patientService.addPatient(new Patient(name, gender, specimen, contact, cnic, doctor, test));
 
         goTo(actionEvent, loader, primaryScene.getURL());
     }

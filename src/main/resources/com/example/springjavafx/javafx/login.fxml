@@ -15,16 +15,20 @@
          <children>
             <ImageView fitHeight="400.0" fitWidth="341.0" pickOnBounds="true">
                <image>
-                  <Image url="@../AdobeStock_78106015_Preview.jpeg" />
+                  <Image url="@../images/loginImage.jpeg" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <ImageView fitHeight="157.0" fitWidth="259.0" layoutX="341.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="400.0" fitWidth="260.0" layoutX="341.0" pickOnBounds="true">
+         <image>
+            <Image url="@../red.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="alertLabel" alignment="CENTER" layoutX="379.0" layoutY="173.0" prefHeight="17.0" prefWidth="175.0" textFill="RED" />
       <JFXTextField fx:id="userField" labelFloat="true" layoutX="403.0" layoutY="200.0" onAction="#onKeyPressed" promptText="Username" />
       <JFXPasswordField fx:id="passwordField" labelFloat="true" layoutX="403.0" layoutY="251.0" onAction="#onKeyPressed" promptText="Password" />
-      <JFXButton fx:id="login" buttonType="RAISED" layoutX="486.0" layoutY="316.0" onAction="#onLogin" text="Login" />
-      <JFXButton fx:id="register" buttonType="RAISED" layoutX="403.0" layoutY="316.0" onAction="#onRegister" text="Register" />
-      <Label fx:id="alertLabel" alignment="CENTER" layoutX="379.0" layoutY="173.0" prefHeight="17.0" prefWidth="175.0" textFill="RED" />
+      <JFXButton fx:id="login" buttonType="RAISED" layoutX="495.0" layoutY="315.0" onAction="#onLogin" prefHeight="25.0" prefWidth="60.0" ripplerFill="#ff0808" style="-fx-background-color: #1dda85;" text="Login" />
+      <JFXButton fx:id="register" buttonType="RAISED" layoutX="425.0" layoutY="315.0" onAction="#onRegister" prefWidth="60.0" style="-fx-background-color: #4cb3e9;" text="Register" />
    </children>
 </AnchorPane>

@@ -16,7 +16,7 @@ public class User {
 	private String name;
 	private String password;
 	private String authorization;
-	private Boolean isActive;
+	private Boolean active;
 	
 	public User(){
 	
@@ -26,7 +26,7 @@ public class User {
 		this.name = name;
 		this.password = password;
 		this.authorization = authorization;
-		this.isActive = false;
+		this.active = false;
 	}
 	
 	public Long getId() {
