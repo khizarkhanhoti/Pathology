@@ -2,6 +2,7 @@ package com.example.springjavafx.services;
 
 import com.example.springjavafx.entities.Doctor;
 import com.example.springjavafx.repositories.DoctorRepository;
+import javafx.fxml.FXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

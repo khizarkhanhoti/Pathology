@@ -1,0 +1,27 @@
+.text-field
+{
+    -fx-background-color: white;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: #0598ff;
+}
+
+.combo-box
+{
+    -fx-background-color: white;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: #0598ff;
+}
+
+.combo-box:hover
+{
+    -fx-background-color : #05a9aa;
+    -fx-border-color:  #FFFF;
+    -fx-border-radius: 30;
+}
+
+.combo-box:pressed
+{
+    -fx-background-color : #05a9aa;
+    -fx-border-color:  #FFFF;
+    -fx-border-radius: 30;
+}

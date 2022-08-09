@@ -1,12 +1,12 @@
 package com.example.springjavafx;
 
 import com.example.springjavafx.entities.User;
+import com.example.springjavafx.helpers.Helper;
 import com.example.springjavafx.repositories.UserRepository;
 import com.gluonhq.ignite.spring.SpringContext;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
 
-import java.net.URL;
 import java.util.List;
 
 @Slf4j
@@ -26,9 +25,9 @@ import java.util.List;
         "com.example.springjavafx"
 })
 public class SpringJavaFxApplication extends Application{
-
+    
     @Autowired
-    private FXMLLoader loader;
+    private  FXMLLoader loader;
     @Autowired
     private UserRepository userRepository;
 
@@ -36,7 +35,8 @@ public class SpringJavaFxApplication extends Application{
 
     @Value("${loginScene}")
     public Resource loginScene;
-
+   
+    
     public static void main(String[] args) {
         Application.launch(SpringJavaFxApplication.class, args);
     }
@@ -44,17 +44,14 @@ public class SpringJavaFxApplication extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         context.init(() -> SpringApplication.run(SpringJavaFxApplication.class));
-        URL url = loginScene.getURL();
-        loader.setLocation(url);
-        Parent primaryView = loader.load();
-        Scene scene = new Scene(primaryView);
-        stage.setTitle("JavaFXSpring");
-        stage.setScene(scene);
+        loader.setLocation(loginScene.getURL());
+        Parent parent = loader.load();
         stage.setOnCloseRequest(windowEvent -> {
-            windowEvent.consume();
             onClose(stage);
+            windowEvent.consume();
         });
-        stage.show();
+        
+        Helper.initStage(stage, loginScene, parent);
     }
     
     public void onClose(Stage stage){
@@ -66,13 +63,4 @@ public class SpringJavaFxApplication extends Application{
         stage.close();
     }
     
-//    @Bean
-//    public DataSource getDataSource() {
-//        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-//        dataSourceBuilder.driverClassName("com.mysql.jdbc.Driver");
-//        dataSourceBuilder.url("jdbc:mysql://localhost/finalproject");
-//        dataSourceBuilder.username("root");
-//        dataSourceBuilder.password("12345678");
-//        return dataSourceBuilder.build();
-//    }
 }

@@ -1,17 +1,28 @@
 package com.example.springjavafx.entities;
 
+import com.example.springjavafx.tests.collective.LFTs;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Setter
+@Getter
 public class Tests {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
+	private int amount;
 	
-	private String name;
-	private String normal_range;
-	private String result;
+	@ManyToOne
+	@JoinColumn(name = "lfts_id")
+	private LFTs lfTs;
+	
+	public Tests(){
+	
+	}
 	
 	public Long getId() {
 		return id;
@@ -21,48 +32,18 @@ public class Tests {
 		this.id = id;
 	}
 	
-	public Tests(){
-	
-	}
-	
-	public Tests(String name, String normal_range){
-		this.name = name;
-		this.normal_range = normal_range;
-		this.result = "result";
-	}
-	
-	public Tests(String name, String normal_range, String result){
-		this.name = name;
-		this.normal_range = normal_range;
-		this.result = result;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public void setNormal_range(String range) {
-		this.normal_range = range;
-	}
-	
-	public String getNormal_range(){
-		return normal_range;
-	}
-	
-	public String getResult() {
-		return result;
-	}
-	
-	public void setResult(String result) {
-		this.result = result;
-	}
-	
 	@Override
 	public String toString() {
-		return name;
+		return getTests();
 	}
+	
+	public String getTests(){
+		String tests = "";
+		if (lfTs != null){
+			tests += lfTs.getName();
+		}
+		
+		return tests;
+	}
+	
 }

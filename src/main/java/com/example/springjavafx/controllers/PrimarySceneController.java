@@ -36,7 +36,7 @@ public class PrimarySceneController implements Initializable {
 
     @Value("${patientScene}")
     private Resource patientScene;
-    @Value("${pendingScene}")
+    @Value("${pendingRecordScene}")
     private Resource pendingScene;
     
     //Global Variable
@@ -44,12 +44,7 @@ public class PrimarySceneController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Patient Button
-        Image patientIcon = new Image("com/example/springjavafx/patientIcon.png");
-        ImageView patientView = new ImageView(patientIcon);
-        patientView.setFitHeight(169);
-        patientView.setFitWidth(300);
-        patientButton.setGraphic(patientView);
+    
     }
 
     public void onNewPatient(ActionEvent actionEvent) throws IOException {

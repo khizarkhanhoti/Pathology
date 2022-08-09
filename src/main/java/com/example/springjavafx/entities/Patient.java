@@ -27,6 +27,11 @@ public class Patient{
     private String contact;
 	@NotNull
     private String cnic;
+	@NotNull
+	@Column(name = "ispending")
+	private Boolean isPending;
+	@NotNull
+	private int amount;
 	
 	@ManyToOne
 	@JoinColumn(name = "referred_by_id")
@@ -35,11 +40,11 @@ public class Patient{
 	
 	//ToDo generating test results and database.
 	@OneToOne
-	@JoinColumn(name = "test_id")
+	@JoinColumn(name = "tests_id")
 	private Tests tests;
 
     public Patient(String name, String gender, String specimen,
-				   String contact, String cnic, Doctor referred_by, Tests tests) {
+				   String contact, String cnic, Doctor referred_by, Tests tests, int amount) {
         this.name = name;
         this.gender = gender;
 		this.specimen = specimen;
@@ -47,6 +52,11 @@ public class Patient{
         this.cnic = cnic;
         this.referred_by = referred_by;
 		this.tests = tests;
+		this.isPending = true;
+		this.amount = amount;
+		if (amount == 0){
+			setIsPending(false);
+		}
     }
 
 	@Override
@@ -72,7 +82,7 @@ public class Patient{
 				", contact='" + contact + '\'' +
 				", cnic='" + cnic + '\'' +
 				", referred_by=" + referred_by +
-				", testList=" + tests +
+				", tests=" + tests +
 				'}';
 	}
 }

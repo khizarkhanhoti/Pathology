@@ -12,7 +12,6 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 public class Doctor {
 
@@ -36,5 +35,10 @@ public class Doctor {
 	@Override
 	public int hashCode() {
 		return getClass().hashCode();
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 }
