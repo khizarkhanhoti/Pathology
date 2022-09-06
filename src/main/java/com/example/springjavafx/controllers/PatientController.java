@@ -2,7 +2,6 @@ package com.example.springjavafx.controllers;
 
 import com.example.springjavafx.entities.Doctor;
 import com.example.springjavafx.entities.Patient;
-import com.example.springjavafx.entities.Test;
 import com.example.springjavafx.entities.Tests;
 import com.example.springjavafx.helpers.ComboBoxAutoComplete;
 import com.example.springjavafx.repositories.DoctorRepository;
@@ -12,6 +11,7 @@ import com.example.springjavafx.services.PatientService;
 import com.example.springjavafx.services.TestsService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -49,8 +49,6 @@ public class PatientController implements Initializable {
     public Label totalLabel;
 
     //Resources
-    @Value("${primaryScene}")
-    public Resource primaryScene;
     @Value("${patientScene}")
     public Resource patientScene;
     
@@ -83,23 +81,29 @@ public class PatientController implements Initializable {
         referredByComboBox.setItems(getDoctorsName());
     
         testsComboBox.setItems(getTestsName());
+    
         
         autoComplete = new ComboBoxAutoComplete<>(referredByComboBox);
-       referredByComboBox.setOnKeyPressed(keyEvent -> autoComplete.handleOnKeyPressed(keyEvent));
+        referredByComboBox.setOnKeyReleased(keyEvent -> {
+            System.out.println(keyEvent.getCode());
+            autoComplete.handleOnKeyPressed(keyEvent);
+        });
+    
+        System.out.println("<-----Patient Initialized----->");
     }
     
     //Provides names for Combo Box
     public ObservableList<String> getDoctorsName(){
         List<String> names = new ArrayList<>();
-        doctorRepository.findAll().stream().forEach(doctor -> names.add(doctor.getName()));
+        doctorRepository.findAll().forEach(doctor -> names.add(doctor.getName()));
         return FXCollections.observableArrayList(names);
     }
     
     //Provides names for Combo Box
     public ObservableList<String> getTestsName(){
-        List<String> names = new ArrayList<>();
-        testRepository.findAll().stream().forEach(test -> names.add(test.getName()));
-        return FXCollections.observableArrayList(names);
+        ObservableList tests = FXCollections.observableArrayList("LFTs", "SGPT", "SBR","Alkaline Phosphatse",
+                "S.Cholesterol");
+        return tests;
     }
     
     @FXML
@@ -117,14 +121,14 @@ public class PatientController implements Initializable {
         Tests tests = testsService.add(testRequired);
         int amount = tests.getAmount();
         
+        
         amountLabel.setText("" + amount);
         int discount = Integer.parseInt(discountField.getText());
         if (discount <= amount) {
             amount = amount - discount;
-            totalLabel.setText("" + amount);
         }
         int received = Integer.parseInt(receivedField.getText());
-        if (received <= received) {
+        if (received <= amount) {
             amount = amount - received;
             patientService.addPatient(new Patient(name, gender, specimen, contact, cnic, doctor, tests, amount));
         }
@@ -143,22 +147,19 @@ public class PatientController implements Initializable {
         amountLabel.setText("0");
     }
     
-    public void onKeyTyped(){
-        referredByComboBox.setPromptText("");
-        referredByComboBox.setOnKeyPressed(keyEvent -> {
-            System.out.println("key typed : " + keyEvent.getCode().getName());
-            autoComplete.handleOnKeyPressed(keyEvent);
-        });
-    }
+  
     
     public void onSelection() {
-        String test = testsComboBox.getSelectionModel().getSelectedItem();
-        String amount = "" + testsService.getAmount(test);
-        amountLabel.setText(amount);
+        String amount = "";
+        if (amount.equals("")) {
+            String test = testsComboBox.getSelectionModel().getSelectedItem();
+            amount = "" + testsService.getAmount(test);
+            amountLabel.setText(amount);
+        }
+        
+        totalLabel.setText("" + amount);
     }
     
     
-    public void onType(KeyEvent keyEvent) {
-        autoComplete.handleOnKeyPressed(keyEvent);
-    }
+    
 }

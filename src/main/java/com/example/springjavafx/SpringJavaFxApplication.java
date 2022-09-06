@@ -30,7 +30,9 @@ public class SpringJavaFxApplication extends Application{
     private  FXMLLoader loader;
     @Autowired
     private UserRepository userRepository;
-
+    
+    private Helper helper = new Helper();
+    
     private final SpringContext context = new SpringContext(this);
 
     @Value("${loginScene}")
@@ -51,7 +53,7 @@ public class SpringJavaFxApplication extends Application{
             windowEvent.consume();
         });
         
-        Helper.initStage(stage, loginScene, parent);
+        helper.initStage(stage, loginScene, parent);
     }
     
     public void onClose(Stage stage){

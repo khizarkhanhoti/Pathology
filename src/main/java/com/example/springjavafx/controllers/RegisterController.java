@@ -1,13 +1,17 @@
 package com.example.springjavafx.controllers;
 
 import com.example.springjavafx.entities.User;
+import com.example.springjavafx.helpers.Helper;
 import com.example.springjavafx.repositories.UserRepository;
+import com.lowagie.text.Anchor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -30,8 +34,9 @@ public class RegisterController implements Initializable {
 	
 	@Value("${loginScene}")
 	Resource loginScene;
+	
 	@Autowired
-	private FXMLLoader loader;
+	private FXMLLoader loginLoader;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -82,6 +87,9 @@ public class RegisterController implements Initializable {
 		if (isCorrect){
 			User user = new User(userName.getText(), password.getText(), authorization.getValue());
 			userRepository.save(user);
+			Helper helper = new Helper();
+			helper.initStage(event, loginLoader, loginScene);
+			
 		}
 		
 	}

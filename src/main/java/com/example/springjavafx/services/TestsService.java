@@ -2,6 +2,7 @@ package com.example.springjavafx.services;
 
 import com.example.springjavafx.entities.Tests;
 import com.example.springjavafx.repositories.TestsRepository;
+import com.example.springjavafx.services.tests.LFTsService;
 import com.example.springjavafx.tests.collective.LFTs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

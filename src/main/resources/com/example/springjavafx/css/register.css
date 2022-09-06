@@ -35,6 +35,7 @@
 .button
 {
     -fx-background-color: #0598ff;
+    -fx-text-fill: white;
 }
 
 /*.combo-box*/

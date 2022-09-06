@@ -1,33 +1,29 @@
 .button
 {
     -fx-background-color : #0598ff;
-    -fx-background-radius :  0em;
+    -fx-text-fill: white;
 }
 .button:hover
 {
     -fx-background-color : #05a9aa;
+    -fx-text-fill: white;
 }
 .button:pressed
 {
     -fx-background-color : #05a9aa ;
+    -fx-text-fill: white;
 }
 
 .button:focused{
     -fx-background-color: #05a9aa;
     -fx-border-color: #CDD1D6;
     -fx-border-width: 0px, 0px, 0px, 3px;
+    -fx-text-fill: white;
 }
 
 #titleLable
 {
     -fx-text-fill: white;
-}
-
-#sceneLabel
-{
-    -fx-text-fill: white;
-    -fx-font-size: 30;
-    -fx-font-style: bold;
 }
 
 #topAnchorPane

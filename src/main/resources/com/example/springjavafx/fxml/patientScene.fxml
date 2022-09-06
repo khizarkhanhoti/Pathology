@@ -12,11 +12,11 @@
 <AnchorPane stylesheets="@../css/patient.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.springjavafx.controllers.PatientController">
    <children>
       <TextField fx:id="name" layoutX="35.0" layoutY="14.0" promptText="Name" />
-      <ComboBox fx:id="genderComboBox" layoutX="425.0" layoutY="21.0" prefHeight="25.0" prefWidth="101.0" promptText="Gender" />
       <TextField fx:id="cnic" layoutX="226.0" layoutY="14.0" prefHeight="25.0" prefWidth="149.0" promptText="CNIC" />
+      <ComboBox fx:id="genderComboBox" layoutX="425.0" layoutY="21.0" prefHeight="25.0" prefWidth="101.0" promptText="Gender" />
       <TextField fx:id="cellNo" layoutX="35.0" layoutY="59.0" promptText="Cell No." />
+      <ComboBox fx:id="referredByComboBox" editable="true" layoutX="226.0" layoutY="59.0" prefHeight="27.0" prefWidth="149.0" promptText="Referred By" visibleRowCount="5" />
       <ComboBox fx:id="specimenComboBox" layoutX="424.0" layoutY="59.0" prefHeight="25.0" prefWidth="101.0" promptText="Specimen" />
-      <ComboBox fx:id="referredByComboBox" layoutX="226.0" layoutY="59.0" onAction="#onKeyTyped" onKeyTyped="#onType" prefHeight="27.0" prefWidth="149.0" promptText="Referred By" visibleRowCount="5" />
       <ComboBox fx:id="testsComboBox" layoutX="425.0" layoutY="107.0" onAction="#onSelection" prefHeight="25.0" prefWidth="101.0" promptText="Tests" />
       <Button fx:id="submit" layoutX="478.0" layoutY="333.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
       <Button fx:id="cancel" layoutX="404.0" layoutY="333.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
@@ -75,6 +75,6 @@
       <FontAwesomeIconView fill="#0598ff" glyphName="FLASK" layoutX="401.0" layoutY="76.0" size="16" />
       <FontAwesomeIconView fill="#0598ff" glyphName="ID_CARD_ALT" layoutX="201.0" layoutY="32.0" size="16" />
       <FontAwesomeIconView fill="#0598ff" glyphName="BOOK" layoutX="401.0" layoutY="125.0" size="16" />
-      <FontAwesomeIconView fill="#0598ff" glyphName="USER_PLUS" layoutX="201.0" layoutY="77.0" size="16" text="" />
+      <FontAwesomeIconView fill="#0598ff" glyphName="STETHOSCOPE" layoutX="203.0" layoutY="78.0" size="18" />
    </children>
 </AnchorPane>

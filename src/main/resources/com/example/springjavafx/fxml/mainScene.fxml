@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/styling.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.springjavafx.controllers.mainController">
+<AnchorPane stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.springjavafx.controllers.MainController">
    <children>
-      <BorderPane layoutX="174.0" layoutY="83.0" prefHeight="550.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutX="174.0" layoutY="83.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <VBox prefHeight="517.0" prefWidth="205.0" style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER">
+            <VBox style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="patientButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onPatient" prefHeight="57.0" prefWidth="205.0" stylesheets="@../css/styling.css" text="Patient" textFill="WHITE">
+                  <Button fx:id="patientButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onPatient" prefHeight="57.0" prefWidth="205.0" text="Patient" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -30,19 +30,7 @@
                         <Insets left="30.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="userBtn" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="205.0" stylesheets="@../css/styling.css" text="Users" textFill="WHITE">
-                     <graphic>
-                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/users.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <padding>
-                        <Insets left="30.0" />
-                     </padding>
-                  </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="67.0" mnemonicParsing="false" onAction="#onRecords" prefHeight="57.0" prefWidth="205.0" stylesheets="@../css/styling.css" text="Records" textFill="WHITE">
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="67.0" mnemonicParsing="false" onAction="#onRecords" prefHeight="57.0" prefWidth="205.0" text="Records" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -54,43 +42,7 @@
                         <Insets left="30.0" />
                      </padding>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="125.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="205.0" stylesheets="@../css/styling.css" text="Tasks" textFill="WHITE">
-                     <graphic>
-                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/folder.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <padding>
-                        <Insets left="30.0" />
-                     </padding>
-                  </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="182.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="205.0" stylesheets="@../css/styling.css" text="Logs" textFill="WHITE">
-                     <graphic>
-                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/logs.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <padding>
-                        <Insets left="30.0" />
-                     </padding>
-                  </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="239.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="205.0" stylesheets="@../css/styling.css" text="Chats" textFill="WHITE">
-                     <graphic>
-                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/chat.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <padding>
-                        <Insets left="30.0" />
-                     </padding>
-                  </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="297.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="205.0" stylesheets="@../css/styling.css" text="Report" textFill="WHITE">
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="297.0" mnemonicParsing="false" onAction="#onPatientReport" prefHeight="57.0" prefWidth="205.0" text="Report" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -102,6 +54,50 @@
                         <Insets left="30.0" />
                      </padding>
                   </Button>
+                  <Button fx:id="userBtn" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="205.0" text="Users" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/users.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="125.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="205.0" text="Tasks" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/folder.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="182.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="205.0" text="Logs" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/logs.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="239.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="205.0" text="Setting" textFill="WHITE">
+                     <padding>
+                        <Insets left="32.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="COG" size="18" />
+                     </graphic>
+                  </Button>
                </children>
             </VBox>
          </left>
@@ -109,10 +105,10 @@
             <AnchorPane fx:id="anchorPane" BorderPane.alignment="CENTER" />
          </center>
          <right>
-            <Pane prefHeight="490.0" prefWidth="8.0" style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER" />
+            <Pane style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER" />
          </right>
          <top>
-            <Pane fx:id="topAnchorPane" prefHeight="49.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="topAnchorPane" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="13.0" layoutY="9.0" pickOnBounds="true">
                      <image>
@@ -127,8 +123,11 @@
                         <Insets left="3.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sceneLabel" layoutX="392.0" layoutY="3.0" text="Label" />
-                  <Button fx:id="exit" layoutX="819.0" layoutY="13.0" mnemonicParsing="false" onAction="#onExit" style="-fx-background-color: trasnparent;">
+                  <Label fx:id="sceneLabel" layoutX="391.0" layoutY="9.0" text="label" textFill="WHITE">
+                     <font>
+                        <Font name="Bauhaus 93" size="30.0" />
+                     </font></Label>
+                  <Button fx:id="exit" layoutX="819.0" layoutY="13.0" mnemonicParsing="false" onAction="#onExit" style="-fx-background-color: transparent;">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="16" text="" />
                      </graphic>

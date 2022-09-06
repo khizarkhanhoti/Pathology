@@ -6,19 +6,23 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 
-public class Helper {
+
+public class Helper<T> {
+    
+    @Autowired
+    private FXMLLoader fxmlLoader;
     
     public static double x = 0;
     public static double y = 0;
     public static Parent root;
     
     
-    public static void initStage(ActionEvent actionEvent, FXMLLoader loader, Resource resource) throws IOException {
+    public void initStage(ActionEvent actionEvent, FXMLLoader loader, Resource resource) throws IOException {
     
         loader.setLocation(resource.getURL());
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -36,7 +40,7 @@ public class Helper {
         stage.show();
     }
     
-    public static void initStage(Stage stage, Resource resource, Parent parent) throws IOException {
+    public void initStage(Stage stage, Resource resource, Parent parent) throws IOException {
         
         moveStage(parent);
     
@@ -51,6 +55,17 @@ public class Helper {
         stage.show();
     }
     
+    public Parent getParent(Resource resource) throws IOException {
+        fxmlLoader.setLocation(resource.getURL());
+        Parent parent = fxmlLoader.load();
+        return parent;
+    }
+    
+    public T getController(Resource resource) throws IOException {
+        fxmlLoader.setLocation(resource.getURL());
+        fxmlLoader.load();
+        return fxmlLoader.getController();
+    }
     public static void moveStage(Parent root){
         root.setOnMousePressed(mouseEvent -> {
             x = mouseEvent.getX();

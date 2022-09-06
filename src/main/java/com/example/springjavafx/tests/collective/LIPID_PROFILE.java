@@ -2,9 +2,11 @@ package com.example.springjavafx.tests.collective;
 
 import com.example.springjavafx.tests.byRange.HDL;
 import com.example.springjavafx.tests.byRange.LDL;
+import com.example.springjavafx.tests.byRange.S_CHOLESTEROL;
 import com.example.springjavafx.tests.byState.TRIGLYCERIDE;
 
 public class LIPID_PROFILE {
+	private S_CHOLESTEROL s_cholesterol;
 	private TRIGLYCERIDE triglyceride;
 	private LDL ldl;
 	private HDL hdl;

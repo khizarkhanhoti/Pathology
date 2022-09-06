@@ -25,3 +25,12 @@
     -fx-border-color:  #FFFF;
     -fx-border-radius: 30;
 }
+
+.combo-box:focused
+{
+    -fx-background-color : #05a9aa;
+    -fx-border-color:  #FFFF;
+    -fx-border-radius: 30;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: white;
+}

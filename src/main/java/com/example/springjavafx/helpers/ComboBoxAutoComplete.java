@@ -65,7 +65,13 @@ public class ComboBoxAutoComplete<T> {
 			cmb.getTooltip().show(stage, posX, posY);
 			cmb.show();
 		}
-		cmb.getItems().setAll(filteredList);
+		if (code == KeyCode.DOWN || code == KeyCode.UP || code == KeyCode.ENTER){
+			T s = cmb.getSelectionModel().getSelectedItem();
+			cmb.getItems().setAll(originalItems);
+			cmb.getSelectionModel().select(s);
+		} else {
+			cmb.getItems().setAll(filteredList);
+		}
 	}
 
 	public void handleOnHiding(Event e) {

@@ -1,6 +1,7 @@
 package com.example.springjavafx.controllers;
 
 import com.example.springjavafx.entities.User;
+import com.example.springjavafx.helpers.Helper;
 import com.example.springjavafx.repositories.UserRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,8 +22,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.example.springjavafx.helpers.Helper.initStage;
-
 @Slf4j
 public class LoginController implements Initializable {
     @FXML
@@ -40,12 +39,14 @@ public class LoginController implements Initializable {
     @Autowired
     private UserRepository userRepository;
     
+    private Helper helper = new Helper();
+    
     public void onLogin(ActionEvent event) throws IOException {
         
 //        FontAwesomeIconView awesomeIconView = new FontAwesomeIconView(FontAwesomeIcon.U)
         
         if (checkUserPassword(userField.getText(), passwordField.getText())) {
-            initStage(event, loader, mainScene);
+            helper.initStage(event, loader, mainScene);
         } else {
             userField.setText("");
             passwordField.setText("");
@@ -58,7 +59,7 @@ public class LoginController implements Initializable {
             if (keyEvent.getCode() == KeyCode.ENTER){
                 if(checkUserPassword(userField.getText(), passwordField.getText())){
                     try {
-                        initStage(actionEvent, loader, mainScene);
+                        helper.initStage(actionEvent, loader, mainScene);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -87,6 +88,11 @@ public class LoginController implements Initializable {
         Parent parent = loader.load();
         loginPane.getChildren().removeAll();
         loginPane.getChildren().setAll(parent);
+    }
+    
+    public void setAnchorPane(Parent parent){
+        this.loginPane.getChildren().removeAll();
+        this.loginPane.getChildren().setAll(parent);
     }
     
     @Override

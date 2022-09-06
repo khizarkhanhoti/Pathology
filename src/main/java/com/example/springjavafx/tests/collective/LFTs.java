@@ -1,5 +1,6 @@
 package com.example.springjavafx.tests.collective;
 
+import com.example.springjavafx.tests.byRange.Alkaline_Phosphatase;
 import com.example.springjavafx.tests.byRange.SGPT;
 import com.example.springjavafx.tests.byRange.S_BILIRUBIN;
 import lombok.Getter;
@@ -26,15 +27,20 @@ public class LFTs {
 	@JoinColumn(name = "sgpt_id")
 	public SGPT sgpt;
 	
+	@ManyToOne
+	@JoinColumn(name = "alkaline_phosphatase_id")
+	public Alkaline_Phosphatase alkaline_phosphatase;
+	
 	private final int amount = 300;
 	
 	public LFTs(){
 	
 	}
 	
-	public LFTs(S_BILIRUBIN sbr, SGPT sgpt){
+	public LFTs(S_BILIRUBIN sbr, SGPT sgpt, Alkaline_Phosphatase alkaline_phosphatase){
 		this.sbr = sbr;
 		this.sgpt = sgpt;
+		this.alkaline_phosphatase = alkaline_phosphatase;
 		System.out.println("lfts created.");
 	}
 	
@@ -54,6 +60,8 @@ public class LFTs {
 				", name='" + name + '\'' +
 				", sbr=" + sbr +
 				", sgpt=" + sgpt +
+				", alkaline_phosphatase=" + alkaline_phosphatase +
+				", amount=" + amount +
 				'}';
 	}
 }

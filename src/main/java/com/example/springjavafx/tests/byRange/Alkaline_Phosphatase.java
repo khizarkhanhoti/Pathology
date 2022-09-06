@@ -1,41 +1,41 @@
 package com.example.springjavafx.tests.byRange;
 
-
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 
 @Entity
-@Getter
-public class S_BILIRUBIN{
+public class Alkaline_Phosphatase {
+	public final String NAME = "ALKALINE PHOSPHATASE";
+	public final String NORMAL_RANGE = "UP TO 306 U/L";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
 	
-	public final String NAME = "S.BILIRUBIN";
-	public final String NORMAL_RANGE = "0.4---1.2 mg/dl";
-	
 	private String result;
 	
+	public Long getId() {
+		return id;
+	}
+	
 	public void setId(Long id) {
-		if (id == null) {
-			this.id = id;
-		}
+		this.id = id;
+	}
+	
+	public String getResult() {
+		return result;
 	}
 
 	public void setResult(String result) {
-		this.result = result + " mg/dl";
+		this.result = result + " U/L";
 	}
 	
 	@Override
 	public String toString() {
-		return "S_BILIRUBIN{" +
-				"id=" + id +
-				", NAME='" + NAME + '\'' +
+		return "Alkaline_Phosphatase{" +
+				"NAME='" + NAME + '\'' +
 				", NORMAL_RANGE='" + NORMAL_RANGE + '\'' +
+				", id=" + id +
 				", result='" + result + '\'' +
 				'}';
 	}

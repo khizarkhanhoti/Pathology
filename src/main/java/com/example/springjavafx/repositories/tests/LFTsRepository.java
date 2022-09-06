@@ -1,4 +1,4 @@
-package com.example.springjavafx.repositories;
+package com.example.springjavafx.repositories.tests;
 
 import com.example.springjavafx.tests.collective.LFTs;
 import org.springframework.data.jpa.repository.JpaRepository;
