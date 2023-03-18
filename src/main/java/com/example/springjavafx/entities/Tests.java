@@ -1,68 +1,38 @@
 package com.example.springjavafx.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Setter
+@Getter
 public class Tests {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
-	
 	private String name;
-	private String normal_range;
-	private String result;
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
+	private int amount;
+
 	public Tests(){
-	
 	}
-	
-	public Tests(String name, String normal_range){
+
+	public Tests(Long id, String name, int amount) {
+		this.id = id;
 		this.name = name;
-		this.normal_range = normal_range;
-		this.result = "result";
+		this.amount = amount;
 	}
-	
-	public Tests(String name, String normal_range, String result){
-		this.name = name;
-		this.normal_range = normal_range;
-		this.result = result;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public void setNormal_range(String range) {
-		this.normal_range = range;
-	}
-	
-	public String getNormal_range(){
-		return normal_range;
-	}
-	
-	public String getResult() {
-		return result;
-	}
-	
-	public void setResult(String result) {
-		this.result = result;
-	}
-	
+
 	@Override
 	public String toString() {
-		return name;
+		return "Tests{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", amount=" + amount +
+				'}';
 	}
 }

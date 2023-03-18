@@ -28,6 +28,14 @@ public class User {
 		this.authorization = authorization;
 		this.active = false;
 	}
+
+	public User(Long id, String name, String password, String authorization){
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.authorization = authorization;
+		this.active = false;
+	}
 	
 	public Long getId() {
 		return id;

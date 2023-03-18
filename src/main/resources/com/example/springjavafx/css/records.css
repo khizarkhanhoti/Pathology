@@ -1,0 +1,19 @@
+.button{
+    -fx-background-color: #0589ff;
+    -fx-text-fill: white;
+}
+
+.text-field{
+    -fx-background-color: white;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: #0589ff;
+}
+
+#TestLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 30;
+}
+
+#labelPane {
+    -fx-background-color: #0589ff;
+}

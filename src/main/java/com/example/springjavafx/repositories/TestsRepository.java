@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TestsRepository extends JpaRepository<Tests, Long> {
-	
-	@Query
-	public Tests findByName(String name);
-	
+    @Query
+    Tests findByName(String name);
 }

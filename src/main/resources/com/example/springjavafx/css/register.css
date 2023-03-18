@@ -1,0 +1,58 @@
+.text-field
+{
+    -fx-background-color: white;
+    -fx-border-color: #0598ff;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.text-field:focused
+{
+    -fx-border-color: Black;
+}
+
+.text-field:hover
+{
+    -fx-border-color: Black;
+}
+
+.combo-box
+{
+    -fx-background-color: white;
+    -fx-border-color: #0598ff;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.combo-box:focused
+{
+    -fx-border-color: Black;
+}
+
+.combo-box:hover
+{
+    -fx-border-color: Black;
+}
+
+.button
+{
+    -fx-background-color: #0598ff;
+    -fx-text-fill: white;
+}
+
+/*.combo-box*/
+/*{*/
+/*    -fx-background-color : #141124;*/
+/*    -fx-border-color:  #515658;*/
+/*    -fx-border-radius: 30;*/
+/*}*/
+/*.combo-box:hover*/
+/*{*/
+/*    -fx-background-color : #141124;*/
+/*    -fx-border-color:  #FFFF;*/
+/*    -fx-border-radius: 30;*/
+/*}*/
+/*.combo-box:pressed*/
+/*{*/
+/*    -fx-background-color : #141124;*/
+/*    -fx-border-color:  #FFFF;*/
+/*    -fx-border-radius: 30;*/
+/*}*/

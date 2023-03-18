@@ -3,6 +3,8 @@ package com.example.springjavafx.entities;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -12,6 +14,8 @@ import java.util.Objects;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
+@DynamicUpdate
 public class Patient{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +31,11 @@ public class Patient{
     private String contact;
 	@NotNull
     private String cnic;
+	@NotNull
+	@Column(name = "ispending")
+	private Boolean isPending;
+	@NotNull
+	private int amount;
 	
 	@ManyToOne
 	@JoinColumn(name = "referred_by_id")
@@ -35,18 +44,23 @@ public class Patient{
 	
 	//ToDo generating test results and database.
 	@OneToOne
-	@JoinColumn(name = "test_id")
-	private Tests tests;
+	@JoinColumn(name = "tests_id")
+	private Test test;
 
     public Patient(String name, String gender, String specimen,
-				   String contact, String cnic, Doctor referred_by, Tests tests) {
+				   String contact, String cnic, Doctor referred_by, Test test, int amount) {
         this.name = name;
         this.gender = gender;
 		this.specimen = specimen;
         this.contact = contact;
         this.cnic = cnic;
         this.referred_by = referred_by;
-		this.tests = tests;
+		this.test = test;
+		this.isPending = true;
+		this.amount = amount;
+		if (amount == 0){
+			setIsPending(false);
+		}
     }
 
 	@Override
@@ -72,7 +86,7 @@ public class Patient{
 				", contact='" + contact + '\'' +
 				", cnic='" + cnic + '\'' +
 				", referred_by=" + referred_by +
-				", testList=" + tests +
+				", tests=" + test +
 				'}';
 	}
 }

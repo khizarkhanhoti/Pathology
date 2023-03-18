@@ -12,13 +12,12 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 public class Doctor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String name;
 	
 	public Doctor(String name){
@@ -36,5 +35,10 @@ public class Doctor {
 	@Override
 	public int hashCode() {
 		return getClass().hashCode();
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 }
